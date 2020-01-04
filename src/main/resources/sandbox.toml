@@ -1,0 +1,12 @@
+modid="testmod" # required `[a-z0-9-_]{4,15}`
+version="0.0.0" # required Semver Enforced!
+title="Letter Blocks" # optional DEFAULT: modid
+description="""
+Blocks with letters on them
+"""  # optional DEFAULT: ""
+entrypoint="lakmatiol.letterblocks.LetterBlocks" # required
+authors = [ # required 1
+    "Lakmatiol",
+]
+url = "" # optional DEFAULT: ""
+side = "COMMON" # optional [SERVER, CLIENT, COMMON] DEFAULT: "COMMON"

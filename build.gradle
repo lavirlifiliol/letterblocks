@@ -1,0 +1,29 @@
+plugins {
+    id 'java'
+}
+
+group 'org.sandboxpowered.mdk'
+version '1.0.0'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+    maven { url 'http://maven.sandboxpowered.org' }
+}
+
+configurations.all {
+    resolutionStrategy.cacheDynamicVersionsFor 1, 'seconds'
+    resolutionStrategy.cacheChangingModulesFor 1, 'seconds'
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    runtime project(':Minecraft')
+    compile 'org.sandboxpowered:sandbox-api:0.2.+'
+}
+
+jar {
+    from 'LICENSE'
+//    archiveExtension = 'sbx'
+}

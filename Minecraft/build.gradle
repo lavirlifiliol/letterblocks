@@ -1,0 +1,50 @@
+plugins {
+    id 'fabric-loom' version '0.2.7-SNAPSHOT'
+    id 'maven-publish'
+}
+
+sourceCompatibility = JavaVersion.VERSION_1_8
+targetCompatibility = JavaVersion.VERSION_1_8
+
+archivesBaseName = 'letterblocks'
+version = 'none'
+group = 'net.letterblocks'
+
+minecraft {
+}
+
+repositories {
+    maven { url 'http://maven.sandboxpowered.org' }
+}
+
+configurations.all {
+    resolutionStrategy.cacheDynamicVersionsFor 1, 'seconds'
+    resolutionStrategy.cacheChangingModulesFor 1, 'seconds'
+}
+
+dependencies {
+    minecraft "com.mojang:letterblocks:${project.minecraft_version}"
+    mappings "net.fabricmc:yarn:${project.yarn_mappings}"
+    modCompile "net.fabricmc:fabric-loader:${project.loader_version}"
+    modCompile('org.sandboxpowered:sandbox-fabric:0.2.+:dev'){
+        transitive = false
+    }
+    runtime project(':')
+}
+
+processResources {
+    inputs.property "version", project.version
+
+    from(sourceSets.main.resources.srcDirs) {
+        include "fabric.mod.json"
+        expand "version": project.version
+    }
+
+    from(sourceSets.main.resources.srcDirs) {
+        exclude "fabric.mod.json"
+    }
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
+}
